@@ -15,6 +15,11 @@
 		37462D031F1522060083A3B4 /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D021F1522060083A3B4 /* FindFriendsViewController.swift */; };
 		37462D051F15452E0083A3B4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D041F15452E0083A3B4 /* MainTabBarController.swift */; };
 		37462D081F1548FC0083A3B4 /* MGPhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D071F1548FC0083A3B4 /* MGPhotoHelper.swift */; };
+		37462D0A1F155C8D0083A3B4 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D091F155C8D0083A3B4 /* StorageService.swift */; };
+		37462D0C1F155DA00083A3B4 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D0B1F155DA00083A3B4 /* PostService.swift */; };
+		37462D0E1F1561AF0083A3B4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D0D1F1561AF0083A3B4 /* Post.swift */; };
+		37462D101F1565270083A3B4 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D0F1F1565270083A3B4 /* UIImage+Size.swift */; };
+		37462D121F1565FD0083A3B4 /* StorageReference+Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37462D111F1565FD0083A3B4 /* StorageReference+Post.swift */; };
 		376C09371F13BAB900F089CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C09361F13BAB900F089CE /* AppDelegate.swift */; };
 		376C093E1F13BAB900F089CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 376C093D1F13BAB900F089CE /* Assets.xcassets */; };
 		37BB8CD21F13D37200654B53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37BB8CD11F13D37200654B53 /* Main.storyboard */; };
@@ -34,6 +39,11 @@
 		37462D021F1522060083A3B4 /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
 		37462D041F15452E0083A3B4 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		37462D071F1548FC0083A3B4 /* MGPhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MGPhotoHelper.swift; sourceTree = "<group>"; };
+		37462D091F155C8D0083A3B4 /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		37462D0B1F155DA00083A3B4 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		37462D0D1F1561AF0083A3B4 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		37462D0F1F1565270083A3B4 /* UIImage+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
+		37462D111F1565FD0083A3B4 /* StorageReference+Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageReference+Post.swift"; sourceTree = "<group>"; };
 		376C09331F13BAB900F089CE /* Makestagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Makestagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		376C09361F13BAB900F089CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		376C093D1F13BAB900F089CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				37462CF91F1510DB0083A3B4 /* UserService.swift */,
+				37462D091F155C8D0083A3B4 /* StorageService.swift */,
+				37462D0B1F155DA00083A3B4 /* PostService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -74,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				37462CFE1F151A230083A3B4 /* Storyboard+Utility.swift */,
+				37462D0F1F1565270083A3B4 /* UIImage+Size.swift */,
+				37462D111F1565FD0083A3B4 /* StorageReference+Post.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -156,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				37BB8CE11F140C6100654B53 /* User.swift */,
+				37462D0D1F1561AF0083A3B4 /* Post.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -304,14 +319,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				37BB8CE21F140C6100654B53 /* User.swift in Sources */,
+				37462D0A1F155C8D0083A3B4 /* StorageService.swift in Sources */,
 				37BB8CDF1F13DA6700654B53 /* LoginViewController.swift in Sources */,
 				37462D051F15452E0083A3B4 /* MainTabBarController.swift in Sources */,
 				37462CFA1F1510DB0083A3B4 /* UserService.swift in Sources */,
+				37462D0E1F1561AF0083A3B4 /* Post.swift in Sources */,
+				37462D101F1565270083A3B4 /* UIImage+Size.swift in Sources */,
 				37462D011F1521F60083A3B4 /* HomeViewController.swift in Sources */,
 				37462D081F1548FC0083A3B4 /* MGPhotoHelper.swift in Sources */,
 				37462CFF1F151A230083A3B4 /* Storyboard+Utility.swift in Sources */,
 				37462D031F1522060083A3B4 /* FindFriendsViewController.swift in Sources */,
+				37462D121F1565FD0083A3B4 /* StorageReference+Post.swift in Sources */,
 				37462CFC1F15192E0083A3B4 /* Constants.swift in Sources */,
+				37462D0C1F155DA00083A3B4 /* PostService.swift in Sources */,
 				37BB8CE61F1412B400654B53 /* CreateUsernameViewController.swift in Sources */,
 				376C09371F13BAB900F089CE /* AppDelegate.swift in Sources */,
 			);
