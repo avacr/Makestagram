@@ -15,6 +15,7 @@ class User : NSObject {
     
     let uid: String
     let username: String
+    var isFollowed = false
     
     init?(snapshot: DataSnapshot) {
         guard let dict = snapshot.value as? [String : Any],
