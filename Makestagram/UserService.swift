@@ -26,7 +26,10 @@ struct UserService {
     }
     
     static func create(_ firUser: FIRUser, username: String, completion: @escaping (User?) -> Void) {
-        let userAttrs = ["username": username]
+        let userAttrs: [String : Any] = ["username": username,
+                                         "follower_count": 0,
+                                         "following_count" : 0,
+                                         "post_count" : 0]
         
         let ref = Database.database().reference().child("users").child(firUser.uid)
         ref.setValue(userAttrs) { (error, ref) in
@@ -43,7 +46,7 @@ struct UserService {
     }
     
     static func posts(for user: User, completion: @escaping ([Post]) -> Void) {
-        let ref = Database.database().reference().child("posts").child(user.uid)
+        let ref = DatabaseReference.toLocation(.posts(uid: user.uid))
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
                 return completion([])
@@ -120,6 +123,64 @@ struct UserService {
             
             let followersKeys = Array(followersDict.keys)
             completion(followersKeys)
+        })
+    }
+    
+    static func timeline(pageSize: UInt, lastPostKey: String? = nil, completion: @escaping ([Post]) -> Void) {
+        let currentUser = User.current
+        
+        let ref = Database.database().reference().child("timeline").child(currentUser.uid)
+        var query = ref.queryOrderedByKey().queryLimited(toLast: pageSize)
+        if let lastPostKey = lastPostKey {
+            query = query.queryEnding(atValue: lastPostKey)
+        }
+        
+        query.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else { return completion([]) }
+            
+            let dispatchGroup = DispatchGroup()
+            
+            var posts = [Post]()
+            
+            for postSnap in snapshot {
+                guard let postDict = postSnap.value as? [String : Any],
+                    let posterUID = postDict["poster_uid"] as? String
+                    else { continue }
+                
+                dispatchGroup.enter()
+                
+                PostService.show(forKey: postSnap.key, posterUID: posterUID) { (post) in
+                    if let post = post {
+                        posts.append(post)
+                    }
+                    
+                    dispatchGroup.leave()
+                }
+            }
+            
+            dispatchGroup.notify(queue: .main, execute: {
+                completion(posts.reversed())
+            })
+        })
+    }
+    
+    static func observeProfile(for user: User, completion: @escaping (DatabaseReference, User?, [Post]) -> Void) -> DatabaseHandle {
+        // 1
+        let userRef = Database.database().reference().child("users").child(user.uid)
+        
+        // 2
+        return userRef.observe(.value, with: { snapshot in
+            // 3
+            guard let user = User(snapshot: snapshot) else {
+                return completion(userRef, nil, [])
+            }
+            
+            // 4
+            posts(for: user, completion: { posts in
+                // 5
+                completion(userRef, user, posts)
+            })
         })
     }
 }
